@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TemplateRef } from '@angular/core/src/linker/template_ref';
+import { AuthenticationService } from '../services/authentication.service';
+import { JwtHelper } from 'angular2-jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,19 +11,37 @@ import { TemplateRef } from '@angular/core/src/linker/template_ref';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  public modalRef: BsModalRef;
-  constructor(private modalService: BsModalService) {}
 
-  public openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  invalidLogin: boolean;
+  constructor(private authService: AuthenticationService, private router: Router){}
+
+  onLogin(credentials){
+    console.log(credentials); 
+    this.authService.authenticate(credentials).subscribe(result => {  
+      console.log(result);
+      if(result)
+        if(result.token){
+          localStorage.setItem('token', result.token);
+          localStorage.setItem('username', credentials.username);
+          this.router.navigate(['/']);
+        }
+        
+    }, error => {
+      if(error.status == 400)
+        this.invalidLogin = true;
+    })  
+    
   }
 
-  public sayHello(){
-    console.log("Hello world !");
+  isLoggedIn(){
+    let jwtHelper = new JwtHelper();
+    let token = localStorage.getItem('token');
+    if(!token)
+      return false;
+    let isExpired = jwtHelper.isTokenExpired(token);
+    return !isExpired;
   }
 
-  public listen(event){
-    console.log(event)
-  }
+
 
 }

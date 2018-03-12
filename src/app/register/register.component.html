@@ -1,0 +1,22 @@
+<form class="form-inline my-2 my-lg-0" #loginForm="ngForm" (ngSubmit)="register(loginForm.value)">
+  <div class="input-group">
+    <input type="text" class="form-control" name="email" ngModel placeholder="Email" aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group">
+    <input type="text" class="form-control" name="username" ngModel placeholder="Username" aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group">
+    <input class="form-control mr-sm-2" name="password" ngModel type="password" placeholder="password" aria-label="password">
+  </div>
+
+  <div class="input-group">
+    <input class="form-control mr-sm-2" name="confirmPassword" ngModel type="password" placeholder="Password confirmation" aria-label="password">
+  </div>
+  
+   <!-- TODO: Male or female -->
+
+  <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Register</button>
+
+</form>

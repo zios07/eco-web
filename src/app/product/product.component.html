@@ -1,0 +1,68 @@
+<fieldset class="fs-search">
+  <legend>Advanced search</legend>
+  
+  <div class="form-group">
+    <table cellpadding="10">
+      <tr>
+        <td>
+          <label><strong>Label: </strong></label>
+        </td>
+        <td>
+          <input type="text" placeholder="Product name" [(ngModel)]="productSearchDto.productLabel" class="form-control">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label><strong>Price: </strong></label>
+        </td>
+        <td>
+          <span>
+            {{rangeValues[0] | currency}}
+          </span>
+          <p-slider [(ngModel)]="rangeValues" 
+            [range]="true"
+            [min]="0"
+            [max]="10000"
+            (onChange)="priceRangeChanged($event)"
+            ></p-slider>
+
+          <span>
+            {{rangeValues[1] | currency}}
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label><strong>Brand: </strong></label>
+        </td>
+        <td>
+          <span class="form-group" *ngFor="let brand of brands">
+            <input type="checkbox" class="" (change)="brandChanged($event, brand)"> {{brand.label}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div> 
+  <input type="button" class="btn btn-primary" value="Search" (click) = "onSearch()">
+
+</fieldset>
+
+
+<div class="container products-container">
+  <div class="row">
+    <ng-container *ngFor="let p of products; let i = index">
+      <div class="col product-item">
+        <div
+          class="card" style="width: 15rem;">
+          <img src="" alt="Product image" class="card-img-top">
+          <div class="card-body">
+            <h4 class="card-title">{{p.label}}</h4>
+            <p class="card-text">{{p.price | currency:USD:true}}</p>
+            <button class="btn btn-primary" (click)="addToCart(p)">Add to cart</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="(i+1) % 3 === 0" class="w-100"></div>
+    </ng-container>
+  </div>
+</div>

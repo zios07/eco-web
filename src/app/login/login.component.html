@@ -1,1 +1,10 @@
-<p (login)="listen($event)"></p>
+
+<form class="form-signin" #f="ngForm" (ngSubmit)="onLogin(f?.value)">
+    <h2 align="center" class="form-signin-heading">Please sign in</h2>
+    <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username and/or password.</div>
+    <label for="inputUsername" class="sr-only">Email address</label>
+    <input type="text" id="inputUsername" name="username" ngModel class="form-control" placeholder="Username" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" name="password" ngModel class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+</form>
