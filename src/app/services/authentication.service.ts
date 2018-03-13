@@ -8,13 +8,13 @@ import { Router } from "@angular/router";
 @Injectable()
 export class AuthenticationService {
 
-    private url:string = env.baseURL  + env.productRoute;
+    private url:string = env.baseURL ;
 
     constructor(private http:Http, private router: Router){}
 
     authenticate(credentials){
         return this.http.post(this.url+'/api/v1/authentication/authenticate', credentials)
-            .map(response => response.json());
+            .map(response => response);
     }
 
     isLoggedIn(){
@@ -28,7 +28,7 @@ export class AuthenticationService {
 
     logout() {
         localStorage.removeItem('token');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
     }
 
     getConnectedUsername(){
@@ -39,5 +39,9 @@ export class AuthenticationService {
 
         // TODO: implement getConnectedUser() with password set to null ..
         return true;
+    }
+
+    getToken() {
+        return localStorage.getItem('token');
     }
 }

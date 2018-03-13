@@ -16,15 +16,14 @@ export class LoginComponent {
   constructor(private authService: AuthenticationService, private router: Router){}
 
   onLogin(credentials){
-    console.log(credentials); 
     this.authService.authenticate(credentials).subscribe(result => {  
+      let token = result["_body"];
       console.log(result);
-      if(result)
-        if(result.token){
-          localStorage.setItem('token', result.token);
-          localStorage.setItem('username', credentials.username);
-          this.router.navigate(['/']);
-        }
+      if(token) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', credentials.username);
+        this.router.navigate(['/']);
+      }
         
     }, error => {
       if(error.status == 400)

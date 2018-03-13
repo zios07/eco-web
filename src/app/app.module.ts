@@ -16,7 +16,8 @@ import { RegisterComponent } from './register/register.component';
 import { ProductComponent } from './product/product.component';
 import { ProductService } from './services/product.service';
 import { BrandService } from './services/brand.service';
-import { HttpModule, RequestOptions, Http  } from '@angular/http';
+import { HttpModule, RequestOptions, Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -74,7 +75,8 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 			provide: AuthHttp,
 			useFactory: authHttpServiceFactory,
 			deps: [Http, RequestOptions]
-		}
+		},
+		HttpClient
 	],	
 	bootstrap: [AppComponent]
 })

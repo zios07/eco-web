@@ -30,7 +30,7 @@ export class ProductComponent implements OnInit {
   }
 
   loadProducts(page, size) {
-    this.productService.loadProducts(page, size).subscribe(result => {
+    this.productService.loadProducts(page, size).subscribe((result: any) => {
       this.products = result.content;
     })
   }
@@ -59,7 +59,7 @@ export class ProductComponent implements OnInit {
   }
 
   onSearch(value) {
-    this.productService.search(this.productSearchDto, this.currentPage, this.size).subscribe(result => {
+    this.productService.search(this.productSearchDto, this.currentPage, this.size).subscribe((result: any) => {
       this.products = result.content;
     }, error => {
       this.toastr.error(String(error));
