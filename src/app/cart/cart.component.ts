@@ -14,7 +14,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class CartComponent {
 
-  url:string = env.baseURL + env.productRoute;
+  url:string = env.baseURL;
   cartProducts: Array<Product> = [];
   totalPrice: number;
   username: string;

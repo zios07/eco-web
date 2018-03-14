@@ -16,18 +16,16 @@ export class LoginComponent {
   constructor(private authService: AuthenticationService, private router: Router){}
 
   onLogin(credentials){
-    console.log(credentials); 
     this.authService.authenticate(credentials).subscribe(result => {  
-      console.log(result);
-      if(result)
-        if(result.token){
-          localStorage.setItem('token', result.token);
-          localStorage.setItem('username', credentials.username);
-          this.router.navigate(['/']);
-        }
+      let token = result["_body"];
+      if(token) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', credentials.username);
+        this.router.navigate(['/']);
+      }
         
     }, error => {
-      if(error.status == 400)
+      if(error.status == 400 || error.status == 401)
         this.invalidLogin = true;
     })  
     
@@ -41,7 +39,5 @@ export class LoginComponent {
     let isExpired = jwtHelper.isTokenExpired(token);
     return !isExpired;
   }
-
-
 
 }

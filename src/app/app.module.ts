@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -16,7 +17,8 @@ import { RegisterComponent } from './register/register.component';
 import { ProductComponent } from './product/product.component';
 import { ProductService } from './services/product.service';
 import { BrandService } from './services/brand.service';
-import { HttpModule, RequestOptions, Http  } from '@angular/http';
+import { HttpModule, RequestOptions, Http } from '@angular/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -26,14 +28,17 @@ import { ToastrModule } from 'ngx-toastr';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { SliderModule } from 'primeng/slider';
 import { FileUploadModule } from 'primeng/fileupload';
+import { RequestInterceptor } from './services/request-interceptor.service';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const appRoutes: Routes = [
+	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent},
-	{ path: '', component: HomeComponent},
 	{ path: 'cart', component: CartComponent },
 	{ path: 'products/add', component: AddProductComponent, canActivate: [AuthGuard] },
 	{ path: 'products', component: ProductComponent, canActivate: [AuthGuard] },
-	{ path: '**', component: NotFoundComponent}
+	{ path: 'contactus', component: ContactUsComponent },
+	{ path: '**', component: NotFoundComponent }
 ]
 
 export function authHttpServiceFactory(http:Http, options: RequestOptions){
@@ -50,7 +55,8 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		ProductComponent,
 		NavComponent,
 		CartComponent,
-		AddProductComponent
+		AddProductComponent,
+		ContactUsComponent
 	],
 	imports: [
 		BrowserModule, 
@@ -60,10 +66,12 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		TooltipModule.forRoot(),
 		ModalModule.forRoot(),
 		FormsModule,
+		HttpClientModule,
 		HttpModule,
 		ToastrModule.forRoot(),
 		SliderModule,
-		FileUploadModule
+		FileUploadModule,
+		NgbModule.forRoot()
 	],
 	providers: [
 		ProductService,
@@ -74,7 +82,13 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 			provide: AuthHttp,
 			useFactory: authHttpServiceFactory,
 			deps: [Http, RequestOptions]
-		}
+		},
+		{ 
+			provide	: HTTP_INTERCEPTORS, 
+			useClass: RequestInterceptor,
+			multi: true 
+		},  
+		HttpClient
 	],	
 	bootstrap: [AppComponent]
 })
