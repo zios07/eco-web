@@ -25,7 +25,7 @@ export class LoginComponent {
       }
         
     }, error => {
-      if(error.status == 400)
+      if(error.status == 400 || error.status == 401)
         this.invalidLogin = true;
     })  
     

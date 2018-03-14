@@ -1,6 +1,9 @@
 
 <form #f="ngForm" (submit)="addProduct(f?.value)" >
-	<div class="container">
+	
+	<div>
+		<h1>Add product</h1>
+		<br>
 		<div class="form-group">
 			<label>Code</label>
 			<input required class="form-control" type="text" name="code" ngModel/>

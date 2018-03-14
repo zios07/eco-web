@@ -32,8 +32,8 @@ import { RequestInterceptor } from './services/request-interceptor.service';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const appRoutes: Routes = [
+	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent},
-	{ path: '', component: HomeComponent},
 	{ path: 'cart', component: CartComponent },
 	{ path: 'products/add', component: AddProductComponent, canActivate: [AuthGuard] },
 	{ path: 'products', component: ProductComponent, canActivate: [AuthGuard] },
