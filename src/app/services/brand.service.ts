@@ -7,7 +7,7 @@ import "rxjs/add/operator/map";
 @Injectable()
 export class BrandService {
 
-	url: string = env.baseURL + env.productRoute;
+	url: string = env.baseURL;
 
   	constructor(private http: AuthHttp) { }
 

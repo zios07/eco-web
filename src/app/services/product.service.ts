@@ -10,18 +10,16 @@ import { Product } from '../../domain/product';
 @Injectable()
 export class ProductService {
 
-    url: string = env.baseURL + env.productRoute;
+    url: string = env.baseURL;
 
     constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
     loadProducts(page, size) {
-        let header = new HttpHeaders()
-            .set('Authorization', this.authService.getToken());
+        // let header = new HttpHeaders()
+        //     .set('Authorization', this.authService.getToken());
 
-        header.append('Authorization', this.authService.getToken());
-        return this.http.get(this.url + "/api/v1/products?page="+page+"&size="+size, {
-            headers: header
-        })
+        // header.append('Authorization', 'Bearer ' + this.authService.getToken());
+        return this.http.get(this.url + "/api/v1/products?page="+page+"&size="+size)
             .map(response => response);
     }
 

@@ -17,7 +17,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductService } from './services/product.service';
 import { BrandService } from './services/brand.service';
 import { HttpModule, RequestOptions, Http } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -27,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AddProductComponent } from './admin/add-product/add-product.component';
 import { SliderModule } from 'primeng/slider';
 import { FileUploadModule } from 'primeng/fileupload';
+import { RequestInterceptor } from './services/request-interceptor.service';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent},
@@ -61,6 +62,7 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		TooltipModule.forRoot(),
 		ModalModule.forRoot(),
 		FormsModule,
+		HttpClientModule,
 		HttpModule,
 		ToastrModule.forRoot(),
 		SliderModule,
@@ -76,6 +78,11 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 			useFactory: authHttpServiceFactory,
 			deps: [Http, RequestOptions]
 		},
+		{ 
+			provide	: HTTP_INTERCEPTORS, 
+			useClass: RequestInterceptor,
+			multi: true 
+		},  
 		HttpClient
 	],	
 	bootstrap: [AppComponent]

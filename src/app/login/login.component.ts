@@ -18,7 +18,6 @@ export class LoginComponent {
   onLogin(credentials){
     this.authService.authenticate(credentials).subscribe(result => {  
       let token = result["_body"];
-      console.log(result);
       if(token) {
         localStorage.setItem('token', token);
         localStorage.setItem('username', credentials.username);
@@ -40,7 +39,5 @@ export class LoginComponent {
     let isExpired = jwtHelper.isTokenExpired(token);
     return !isExpired;
   }
-
-
 
 }
