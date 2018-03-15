@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
   public modalRef: BsModalRef;
 
   constructor(private modalService: BsModalService, 
-              private authService: AuthenticationService,
+              public authService: AuthenticationService,
               private router: Router) { }
 
   ngOnInit() {

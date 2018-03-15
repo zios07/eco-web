@@ -1,14 +1,18 @@
-export class Product{
-    id:number;
-    code:string;
-    label:string;
-    price:number;
+import { Brand } from "./brand";
 
-    constructor(id:number,code:string,label:string,price:number) {
+export class Product{
+    id: number;
+    code: string;
+    label: string;
+    price: number;
+    brand: Brand;
+
+    constructor(id:number, code:string, label:string, price:number, brand: Brand) {
         this.id = id;
         this.code = code;
         this.label = label;
         this.price = price;
+        this.brand = brand;
     }
 
     public getCode(){
@@ -21,5 +25,9 @@ export class Product{
 
     public getPrice(){
         return this.price;
+    }
+
+    public getBrand() {
+        return this.brand;
     }
 }

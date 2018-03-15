@@ -1,0 +1,22 @@
+
+<form #f="ngForm" >
+	
+	<div>
+		<h1>Add product</h1>
+		<br>
+		<div class="form-group">
+			<label>Code</label>
+			<input required class="form-control" type="text" name="code" [(ngModel)]="brand.code"/>
+		</div>
+		
+		<div class="form-group">
+			<label>Label</label>
+			<input required class="form-control" type="text" name="label" [(ngModel)]="brand.label"/>
+		</div>
+
+		<button class="btn btn-primary" [disabled]="f.invalid" (click)="saveBrand()">Save Brand</button>
+		<button type="reset" class="btn btn-default" routerLink="/admin/brands">Cancel</button>
+
+	</div>
+</form>
+
