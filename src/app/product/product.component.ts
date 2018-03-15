@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit {
 
 
   loadBrands() {
-    this.brandService.loadBrands().subscribe(result => {
+    this.brandService.loadBrands().subscribe((result:any) => {
       this.brands = result;
     }, error => {
       this.toastr.error(String(error));
@@ -58,7 +58,7 @@ export class ProductComponent implements OnInit {
     this.productSearchDto.maxPrice = event.values[1];
   }
 
-  onSearch(value) {
+  onSearch() {
     this.productService.search(this.productSearchDto, this.currentPage, this.size).subscribe((result: any) => {
       this.products = result.content;
     }, error => {

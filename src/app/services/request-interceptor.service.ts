@@ -12,7 +12,7 @@ export class RequestInterceptor implements HttpInterceptor {
 
 		// add a custom header
 		const customReq = request.clone({
-			headers: request.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
+			headers: request.headers.set('Authorization', 'Bearer ' + this.authService.getToken())
 		});
 
 		// pass on the modified request object

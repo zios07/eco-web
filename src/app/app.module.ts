@@ -25,17 +25,25 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { AuthGuard } from './auth-guard.service';
 import { CartComponent } from './cart/cart.component';
 import { ToastrModule } from 'ngx-toastr';
-import { AddProductComponent } from './admin/add-product/add-product.component';
+import { AddProductComponent } from './admin/product/add-product/add-product.component';
 import { SliderModule } from 'primeng/slider';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RequestInterceptor } from './services/request-interceptor.service';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AdminBrandComponent } from './admin/brand/admin-brand/admin-brand.component';
+import { AddBrandComponent } from './admin/brand/add-brand/add-brand.component';
+import { AdminProductComponent } from './admin/product/admin-product/admin-product.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent},
 	{ path: 'cart', component: CartComponent },
-	{ path: 'products/add', component: AddProductComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/products/form', component: AddProductComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/products/:id', component: AddProductComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/products', component: AdminProductComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/brands/form', component: AddBrandComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/brands/:id', component: AddBrandComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/brands', component: AdminBrandComponent, canActivate: [AuthGuard] },
 	{ path: 'products', component: ProductComponent, canActivate: [AuthGuard] },
 	{ path: 'contactus', component: ContactUsComponent },
 	{ path: '**', component: NotFoundComponent }
@@ -56,7 +64,10 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		NavComponent,
 		CartComponent,
 		AddProductComponent,
-		ContactUsComponent
+		ContactUsComponent,
+		AdminBrandComponent,
+		AddBrandComponent,
+		AdminProductComponent
 	],
 	imports: [
 		BrowserModule, 

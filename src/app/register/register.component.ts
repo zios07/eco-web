@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  public register(){
+  public register(account){
     console.log("creating account");
   }
 

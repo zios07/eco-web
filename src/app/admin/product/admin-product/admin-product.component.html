@@ -1,0 +1,25 @@
+<button class="btn btn-primary" routerLink="/admin/products/form">Add new product</button>
+
+<table class="table">
+	<thead>
+		<th>Code</th>
+		<th>Label</th>
+		<th>Description</th>
+		<th>Price</th>
+		<th>Store Quantity</th>
+		<th>Brand</th>
+	</thead>
+	<tbody>
+		<tr *ngFor="let p of products">
+			<td>{{ p.code }}</td>
+			<td>{{ p.label }}</td>
+			<td>{{ p.description }}</td>
+			<td>{{ p.price }}</td>
+			<td>{{ p.qteStock }}</td>
+			<td>{{ p.brand?.label }}</td>
+			<td>
+				<a [routerLink]="['/admin/products/', p.id]">Edit</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
