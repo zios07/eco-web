@@ -19,7 +19,7 @@
 			<input class="form-control" type="text" name="description" [(ngModel)]="product.description"/>
 		</div>
 		
-		<div class="form-group">
+		<!-- <div class="form-group">
 			<label>Photos</label>
 			<p-fileUpload name="photos[]"
 					accept="image/*"
@@ -28,6 +28,11 @@
 					customUpload="false"
 					(uploadHandler)="uploadPhotos($event)"
 			></p-fileUpload>
+		</div> -->
+
+		<div class="form-group">
+			<label>Image URL</label>
+			<input class="form-control" type="text" name="imageUrl" [(ngModel)]="product.imgUrl"/>
 		</div>
 
 		<div class="form-group">
