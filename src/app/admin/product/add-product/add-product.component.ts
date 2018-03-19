@@ -15,7 +15,7 @@ import { Brand } from '../../../../domain/brand';
 export class AddProductComponent implements OnInit {
 
 	brands: Array<Brand> = [];
-	product = {};
+	product: Product;
 
 	// brands = [
 	// 	new Brand(1, 'aa', 'bb', 'cc'),
@@ -69,7 +69,7 @@ export class AddProductComponent implements OnInit {
 				this.product = result;
 				// There has to be a better way to do the 2 way binding .. 
 				if(this.brands) {
-					const p:Product = this.product as Product;
+					const p = this.product;
 					let match;
 					this.brands.forEach(function(br){
 						if(br.id == p.brand.id){

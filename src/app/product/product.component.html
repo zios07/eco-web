@@ -17,7 +17,7 @@
         </td>
         <td>
           <span>
-            {{rangeValues[0] | currency}}
+            {{rangeValues[0]  | currency:'USD':true}}
           </span>
           <p-slider [(ngModel)]="rangeValues" 
             [range]="true"
@@ -27,7 +27,7 @@
             ></p-slider>
 
           <span>
-            {{rangeValues[1] | currency}}
+            {{rangeValues[1]  | currency:'USD':true}}
           </span>
         </td>
       </tr>

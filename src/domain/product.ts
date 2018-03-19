@@ -5,16 +5,18 @@ export class Product{
     code: string;
     label: string;
     description: string;
+    qteStock: string;
     price: number;
     brand: Brand;
 
-    constructor(id:number, code:string, label:string, description: string, price:number, brand: Brand) {
+    constructor(id:number, code:string, label:string, description: string, price:number, brand: Brand, qteStock: string) {
         this.id = id;
         this.code = code;
         this.label = label;
         this.description = description;
         this.price = price;
         this.brand = brand;
+        this.qteStock = qteStock;
     }
 
     public getCode(){
