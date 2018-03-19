@@ -54,10 +54,10 @@
       <div class="col product-item">
         <div
           class="card" style="width: 15rem;">
-          <img src="" alt="Product image" class="card-img-top">
+          <img [src]="p.imgUrl" alt="Product image" class="card-img-top">
           <div class="card-body">
             <h4 class="card-title">{{p.label}}</h4>
-            <p class="card-text">{{p.price | currency:USD:true}}</p>
+            <p class="card-text">{{p.price | currency:USD:'symbol-narrow'}}</p>
             <button class="btn btn-primary" (click)="addToCart(p)">Add to cart</button>
           </div>
         </div>
