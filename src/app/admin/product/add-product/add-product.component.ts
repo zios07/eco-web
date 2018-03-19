@@ -17,11 +17,6 @@ export class AddProductComponent implements OnInit {
 	brands: Array<Brand> = [];
 	product: Product;
 
-	// brands = [
-	// 	new Brand(1, 'aa', 'bb', 'cc'),
-	// 	new Brand(2, 'xx', 'yy', 'zz')
-	// ]
-
 	constructor(private router: Router,
 				private route: ActivatedRoute,
 				private productService: ProductService,
@@ -46,7 +41,6 @@ export class AddProductComponent implements OnInit {
 	}
 
 	saveProduct(){
-		console.log(this.product);
 		this.productService.addProduct(this.product).subscribe(result => {
 			this.toastr.success('Product added successfully !');
 			this.router.navigate(['/admin/products']);

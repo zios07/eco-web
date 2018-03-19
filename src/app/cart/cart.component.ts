@@ -26,7 +26,7 @@ export class CartComponent {
 
   loadCart(){ 
     // TODO: dynamic id
-    this.http.get(this.url + "/api/v1/cart/user/1")
+    this.http.get(this.url + "/api/v1/cart/user/2")
       .map(response => response.json())
       .subscribe(result => {
        this.cartProducts = result.products;
