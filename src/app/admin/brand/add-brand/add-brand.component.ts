@@ -12,7 +12,7 @@ import { Brand } from '../../../../domain/brand';
 })
 export class AddBrandComponent implements OnInit {
 
-	brand = {};
+	brand:Brand = new Brand();
 
 	constructor(private brandService: BrandService,
 							private router: Router,

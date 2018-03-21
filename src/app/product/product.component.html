@@ -17,7 +17,7 @@
         </td>
         <td>
           <span>
-            {{rangeValues[0] | currency}}
+            {{rangeValues[0]  | currency:'USD':'symbol-narrow'}}
           </span>
           <p-slider [(ngModel)]="rangeValues" 
             [range]="true"
@@ -27,7 +27,7 @@
             ></p-slider>
 
           <span>
-            {{rangeValues[1] | currency}}
+            {{rangeValues[1]  | currency:'USD':'symbol-narrow'}}
           </span>
         </td>
       </tr>
@@ -37,7 +37,8 @@
         </td>
         <td>
           <span class="form-group" *ngFor="let brand of brands">
-            <input type="checkbox" class="" (change)="brandChanged($event, brand)"> {{brand.label}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input id="brand{{brand.id}}" type="checkbox" class="" (change)="brandChanged($event, brand)"> 
+            <label for="brand{{brand.id}}">{{brand.label}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           </span>
         </td>
       </tr>
@@ -57,7 +58,7 @@
           <img [src]="p.imgUrl" alt="Product image" class="card-img-top">
           <div class="card-body">
             <h4 class="card-title">{{p.label}}</h4>
-            <p class="card-text">{{p.price | currency:USD:'symbol-narrow'}}</p>
+            <p class="card-text">{{p.price  | currency:'USD':'symbol-narrow'}}</p>
             <button class="btn btn-primary" (click)="addToCart(p)">Add to cart</button>
           </div>
         </div>

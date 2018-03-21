@@ -11,7 +11,11 @@
 			<td>{{ b.label }}</td>
 			<td>
 				<a [routerLink]="['/admin/brands/', b.id]">Edit</a>
+				<a (click)="deleteBrand(b.id)">Delete</a>
 			</td>
+		</tr>
+		<tr *ngIf="brands.length == 0">
+			<td>No brands found</td>
 		</tr>
 	</tbody>
 </table>

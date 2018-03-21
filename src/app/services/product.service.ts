@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { env } from "../../assets/config/app.config";
 import { AuthHttp } from 'angular2-jwt';
 import "rxjs/add/operator/map";
-import { CartDto } from "../../domain/cartDto";
+import { CartDto } from "../../dto/cartDto";
 import { AuthenticationService } from "./authentication.service";
 import { Product } from '../../domain/product';
 
@@ -42,7 +42,6 @@ export class ProductService {
     }
 
     deleteProductFromCart(product, username) {
-        let dto = new CartDto(username, product);
         return this.http.delete(this.url + "/api/v1/cart/product/delete?productid="+product.id+"&username="+username)
             .map(response => response);
     }

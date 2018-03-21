@@ -25,15 +25,16 @@ export class CartComponent {
               private authService: AuthenticationService) { }
 
   loadCart(){ 
-    // TODO: dynamic id
-    this.http.get(this.url + "/api/v1/cart/user/1")
+    this.http.get(this.url + "/api/v1/cart/user/" + this.username)
       .map(response => response.json())
       .subscribe(result => {
        this.cartProducts = result.products;
       this.calculateTotalPrice(this.cartProducts);
-    }, error => {
-      this.toastr.error(error);
-    } );
+      }, error => {
+        if(error.status !== 404)
+          this.toastr.error(error);
+      }
+    );
   }
 
   calculateTotalPrice(args){
@@ -72,8 +73,8 @@ export class CartComponent {
 
 
   ngOnInit() {
-    this.loadCart();
     this.username = this.authService.getConnectedUsername();
+    this.loadCart();
   }
   
 }
