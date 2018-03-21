@@ -31,7 +31,6 @@ export class ProductService {
 
     addProductToCart(product, username) {
         let dto = new CartDto(username, product);
-        console.log(dto);
         return this.http.put(this.url + "/api/v1/cart/product/add", dto)
             .map(response => response);
     }
