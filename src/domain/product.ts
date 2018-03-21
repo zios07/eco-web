@@ -9,7 +9,8 @@ export class Product{
     price: number;
     brand: Brand;
 
-    constructor(id:number, code:string, label:string, description: string, price:number, brand: Brand, qteStock: string) {
+    constructor(id?:number, code?:string, label?:string, description?: string, price?:number,
+         brand?: Brand, qteStock?: string) {
         this.id = id;
         this.code = code;
         this.label = label;

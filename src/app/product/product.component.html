@@ -37,8 +37,8 @@
         </td>
         <td>
           <span class="form-group" *ngFor="let brand of brands">
-            <input id="brand" type="checkbox" class="" (change)="brandChanged($event, brand)"> 
-            <label for="brand">{{brand.label}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input id="brand{{brand.id}}" type="checkbox" class="" (change)="brandChanged($event, brand)"> 
+            <label for="brand{{brand.id}}">{{brand.label}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
           </span>
         </td>
       </tr>

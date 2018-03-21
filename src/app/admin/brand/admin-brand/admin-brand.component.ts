@@ -26,6 +26,14 @@ export class AdminBrandComponent implements OnInit {
 		})
 	}
 
+	deleteBrand(id) {
+		this.brandService.deleteBrand(id).subscribe(result => {
+			this.toastr.info('Brand deleted');
+		}, error => {
+			this.toastr.error(String(error));
+		})
+	}
+
 	loadBrands() {
 		this.brandService.loadBrands().subscribe((result:any) => {
 			this.brands = result;

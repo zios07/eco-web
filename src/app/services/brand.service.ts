@@ -20,6 +20,11 @@ export class BrandService {
 			.map(response => response);
 	}
 
+	deleteBrand(id) {
+		return this.http.delete(this.url + "/api/v1/brand/" + id )
+			.map(response => response);
+	}
+
 	getBrand(id) {
 		return this.http.get(this.url + "/api/v1/brand/" + id)
 			.map(response => response);

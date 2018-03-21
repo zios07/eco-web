@@ -15,7 +15,7 @@ import { Brand } from '../../../../domain/brand';
 export class AddProductComponent implements OnInit {
 
 	brands: Array<Brand> = [];
-	product: Product;
+	product: Product = new Product();
 
 	constructor(private router: Router,
 				private route: ActivatedRoute,

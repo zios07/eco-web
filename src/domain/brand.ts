@@ -4,7 +4,7 @@ export class Brand {
     label:string;
     country:string;
 
-    constructor(id:number,code:string,label:string,country:string) {
+    constructor(id?:number, code?:string,label?:string,country?:string) {
         this.id = id;
         this.code = code;
         this.label = label;

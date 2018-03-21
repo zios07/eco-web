@@ -21,5 +21,8 @@
 				<a [routerLink]="['/admin/products/', p.id]">Edit</a>
 			</td>
 		</tr>
+		<tr *ngIf="products.length == 0">
+			<td>No brands found</td>
+		</tr>
 	</tbody>
 </table>

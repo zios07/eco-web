@@ -12,13 +12,18 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  jwtHelper: JwtHelper = new JwtHelper();
+  
   invalidLogin: boolean;
-  constructor(private authService: AuthenticationService, private router: Router){}
+  constructor(private authService: AuthenticationService, 
+              private router: Router){}
 
   onLogin(credentials){
     this.authService.authenticate(credentials).subscribe(result => {  
       let token = result["_body"];
       if(token) {
+        console.log(token);
+        console.log(this.jwtHelper.decodeToken(token));
         localStorage.setItem('token', token);
         localStorage.setItem('username', credentials.username);
         this.router.navigate(['/']);
@@ -32,11 +37,10 @@ export class LoginComponent {
   }
 
   isLoggedIn(){
-    let jwtHelper = new JwtHelper();
     let token = localStorage.getItem('token');
     if(!token)
       return false;
-    let isExpired = jwtHelper.isTokenExpired(token);
+    let isExpired = this.jwtHelper.isTokenExpired(token);
     return !isExpired;
   }
 
