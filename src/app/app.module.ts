@@ -33,10 +33,12 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AdminBrandComponent } from './admin/brand/admin-brand/admin-brand.component';
 import { AddBrandComponent } from './admin/brand/add-brand/add-brand.component';
 import { AdminProductComponent } from './admin/product/admin-product/admin-product.component';
+import { UserService } from './services/user.service';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent},
+	{ path: 'register', component: RegisterComponent},
 	{ path: 'cart', component: CartComponent },
 	{ path: 'admin/products/form', component: AddProductComponent, canActivate: [AuthGuard] },
 	{ path: 'admin/products/:id', component: AddProductComponent, canActivate: [AuthGuard] },
@@ -99,7 +101,8 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 			useClass: RequestInterceptor,
 			multi: true 
 		},  
-		HttpClient
+		HttpClient,
+		UserService
 	],	
 	bootstrap: [AppComponent]
 })
