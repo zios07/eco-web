@@ -34,6 +34,9 @@ import { AdminBrandComponent } from './admin/brand/admin-brand/admin-brand.compo
 import { AddBrandComponent } from './admin/brand/add-brand/add-brand.component';
 import { AdminProductComponent } from './admin/product/admin-product/admin-product.component';
 import { UserService } from './services/user.service';
+import { AdminUserComponent } from './admin/user/admin-user/admin-user.component';
+import { UserFormComponent } from './admin/user/user-form/user-form.component';
+import { RoleService } from './services/role.service';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -46,6 +49,9 @@ const appRoutes: Routes = [
 	{ path: 'admin/brands/form', component: AddBrandComponent, canActivate: [AuthGuard] },
 	{ path: 'admin/brands/:id', component: AddBrandComponent, canActivate: [AuthGuard] },
 	{ path: 'admin/brands', component: AdminBrandComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/users/form', component: UserFormComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/users/:id', component: UserFormComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/users', component: AdminUserComponent, canActivate: [AuthGuard] },
 	{ path: 'products', component: ProductComponent, canActivate: [AuthGuard] },
 	{ path: 'contactus', component: ContactUsComponent },
 	{ path: '**', component: NotFoundComponent }
@@ -69,7 +75,9 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		ContactUsComponent,
 		AdminBrandComponent,
 		AddBrandComponent,
-		AdminProductComponent
+		AdminProductComponent,
+		AdminUserComponent,
+		UserFormComponent
 	],
 	imports: [
 		BrowserModule, 
@@ -102,7 +110,8 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 			multi: true 
 		},  
 		HttpClient,
-		UserService
+		UserService,
+		RoleService
 	],	
 	bootstrap: [AppComponent]
 })

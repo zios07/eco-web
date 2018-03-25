@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
 
-  user = { account :{ password: ""}};
+  user = { account :{ username:"", password: ""}};
   confirmPWD: string = "";
 
   constructor(private userService: UserService,
@@ -21,8 +21,6 @@ export class RegisterComponent implements OnInit {
   }
 
   public register(){
-    console.log(this.user);
-    console.log(this.confirmPWD);
     if(this.user.account.password == this.confirmPWD) {
       this.userService.registerUser(this.user).subscribe((result: any) => {
         this.toastr.success("Registration success");
