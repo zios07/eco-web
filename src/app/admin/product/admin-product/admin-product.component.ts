@@ -32,6 +32,15 @@ export class AdminProductComponent implements OnInit {
 		}, error => {
 			this.toastr.error(String(error));
 		});
-  	}
+	}
+	  
+	deleteProduct(id) {
+		this.productService.deleteProduct(id).subscribe((result: any) => {
+			this.loadProducts();
+			this.toastr.info('Product deleted');
+		}, error => {
+			this.toastr.error(String(error));
+		});
+	}
 
 }

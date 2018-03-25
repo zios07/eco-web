@@ -71,4 +71,8 @@ export class ProductService {
         // return this.http.post(this.url + "/api/v1/products/add/photo/upload", photos)
         //     .map(response => response);
     }
+
+    deleteProduct(id) {
+        return this.http.delete(this.url + "/api/v1/products/" + id)
+    }
 }

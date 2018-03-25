@@ -64,7 +64,7 @@ export class CartComponent {
  
   deleteProductFromCart(product) {
     this.productService.deleteProductFromCart(product, this.username).subscribe(result => {
-      this.toastr.success('Product deleted')
+      this.toastr.success('Product removed from cart')
       this.loadCart();
     }, error => {
       this.toastr.error(String(error));
