@@ -18,7 +18,12 @@
 			<td>{{ p.qteStock }}</td>
 			<td>{{ p.brand?.label }}</td>
 			<td>
-				<a [routerLink]="['/admin/products/', p.id]">Edit</a>
+				<a [routerLink]="['/admin/products/', p.id]">
+					<i class="fa fa-edit"></i>
+				</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color:red" (click)="deleteProduct(p.id)">
+					<i class="fa fa-remove"></i>
+				</a>
 			</td>
 		</tr>
 		<tr *ngIf="products.length == 0">

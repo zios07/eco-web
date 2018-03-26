@@ -28,9 +28,12 @@ export class AdminBrandComponent implements OnInit {
 
 	deleteBrand(id) {
 		this.brandService.deleteBrand(id).subscribe(result => {
+			this.loadBrands();
 			this.toastr.info('Brand deleted');
 		}, error => {
-			this.toastr.error(String(error));
+			if(error.error)
+				if(error.error.code === "SERVER.EXCEPTION")
+					this.toastr.error("Cannot delete this brand because is linked to some products. Delete those products first and try again ");
 		})
 	}
 

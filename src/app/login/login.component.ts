@@ -22,8 +22,6 @@ export class LoginComponent {
     this.authService.authenticate(credentials).subscribe(result => {  
       let token = result["_body"];
       if(token) {
-        console.log(token);
-        console.log(this.jwtHelper.decodeToken(token));
         localStorage.setItem('token', token);
         localStorage.setItem('username', credentials.username);
         this.router.navigate(['/']);

@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 export class AuthenticationService {
 
     private url:string = env.baseURL ;
+    jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(private http:Http, private router: Router){}
 
@@ -36,10 +37,13 @@ export class AuthenticationService {
     }
 
     isAdmin() {
-
-        // TODO: implement getConnectedUser() with password set to null ..
-        return true;
+        let token = localStorage.getItem('token');
+        let decodedToken:any = this.jwtHelper.decodeToken(token);
+        if(decodedToken.role && decodedToken.role.indexOf('ADMIN') > -1)
+            return true;
+        return false;
     }
+
 
     getToken() {
         return localStorage.getItem('token');

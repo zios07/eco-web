@@ -10,8 +10,12 @@
 			<td>{{ b.code }}</td>
 			<td>{{ b.label }}</td>
 			<td>
-				<a [routerLink]="['/admin/brands/', b.id]">Edit</a>
-				<a (click)="deleteBrand(b.id)">Delete</a>
+				<a [routerLink]="['/admin/brands/', b.id]">
+					<i class="fa fa-edit"></i>
+				</a> &nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color:red" (click)="deleteBrand(b.id)">
+					<i class="fa fa-remove"></i>
+				</a>
 			</td>
 		</tr>
 		<tr *ngIf="brands.length == 0">
