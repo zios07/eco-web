@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { RoleService } from '../../../services/role.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { User } from '../../../../domain/user';
+import { Account } from '../../../../domain/account';
+import { Role } from '../../../../domain/role';
 
 @Component({
   selector: 'app-user-form',
@@ -11,17 +14,21 @@ import { Router } from '@angular/router';
 })
 export class UserFormComponent implements OnInit {
 
-  roles:any;
-  user = { account :{ username:"", password: ""}};
+  roles: Array<Role>;
+  // user = { account :{ username:"", password: ""}};
+  user: User = new User();
   confirmPWD: string = "";
 
   constructor(private userService: UserService,
               private roleService: RoleService,
               private router: Router,
+              private route: ActivatedRoute,
               private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.user.setAccount(new Account());
     this.loadRoles();
+    this.loadUserToEdit();
   }
 
   register() {
@@ -34,11 +41,39 @@ export class UserFormComponent implements OnInit {
   }
 
   loadRoles() {
-    this.roleService.loadRoles().subscribe(result => {
+    this.roleService.loadRoles().subscribe((result: Role[]) => {
       this.roles = result;
     }, error => {
       this.toastr.error(String(error));
     })
+  }
+
+  loadUserToEdit() {
+    let id = this.route.snapshot.paramMap.get('id');
+    if(id) {
+      this.userService.findById(id).subscribe((result: User) => {
+        // console.log(result);
+        // let role = new Role();
+        // role.id = result.role.id;
+        // role.roleCode = result.role.roleCode;
+        // role.roleLabel = result.role.roleLabel;
+        // this.user = new User(result.id, result.firstName, result.lastName, result.email, 
+        //   result.account, role , result.bDate);
+        this.user = result;
+        if(this.roles) {
+          const p = this.user;
+          let match;
+          this.roles.forEach(function(br){
+            if(br.id == p.role.id){
+              match = br;
+            }
+          })
+          this.user.role = match;
+        }
+      }, error => {
+        this.toastr.error(String(error));
+      })
+    }
   }
 
 }
