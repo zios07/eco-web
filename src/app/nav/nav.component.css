@@ -5,3 +5,7 @@
 .modal-content {
     height: 400px;
 }
+
+.dropdown-item, .nav-link {
+    cursor: pointer;
+}
