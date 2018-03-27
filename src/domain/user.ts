@@ -3,13 +3,13 @@ import { Account } from "./account";
 
 export class User {
     
-    private id: number;
-    private firstName: string;
-    private lastName: string;
-    private email: string;
-    private account: Account;
-    private role: Role;
-    private bDate: Date;
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    account: Account;
+    role: Role;
+    bDate: Date;
 
     constructor(id?: number, firstName?: string, lastName?: string, email?: string,
         account?: Account, role?: Role, bDate?: Date) {
@@ -45,6 +45,14 @@ export class User {
 
     getBDate() {
         return this.bDate;
+    }
+
+    setAccount(ac: Account) {
+        this.account = ac;
+    }
+
+    setRole(rl: Role) {
+        this.role = rl;
     }
 
 }

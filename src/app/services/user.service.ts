@@ -23,4 +23,8 @@ export class UserService {
     return this.httpClient.delete(this.url + "/api/v1/users/" + id);
   }
 
+  findById(id) {
+    return this.httpClient.get(this.url + "/api/v1/users/" + id);
+  }
+
 }
