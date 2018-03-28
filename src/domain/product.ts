@@ -8,9 +8,10 @@ export class Product{
     qteStock: string;
     price: number;
     brand: Brand;
+    imgUrl: string;
 
     constructor(id?:number, code?:string, label?:string, description?: string, price?:number,
-         brand?: Brand, qteStock?: string) {
+         brand?: Brand, qteStock?: string, imgUrl?: string) {
         this.id = id;
         this.code = code;
         this.label = label;
@@ -18,6 +19,7 @@ export class Product{
         this.price = price;
         this.brand = brand;
         this.qteStock = qteStock;
+        this.imgUrl = imgUrl;
     }
 
     public getCode(){
@@ -38,5 +40,9 @@ export class Product{
 
     public getBrand() {
         return this.brand;
+    }
+
+    public getImgUrl() {
+        return this.imgUrl;
     }
 }
