@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { env } from "../../assets/config/app.config";
 import { HttpClient } from '@angular/common/http';
 import "rxjs/add/operator/map";
+import { environment } from '../../environments/environment.prod';
 
 @Injectable()
 export class BrandService {
 
-	url: string = env.baseURL;
+	url: string = environment.API_URL;
 
 	constructor(private http: HttpClient) { }
 

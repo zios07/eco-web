@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { env } from '../../assets/config/app.config';
 import { AuthHttp } from 'angular2-jwt';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../../domain/product';
 import { ProductService } from '../services/product.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +14,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class CartComponent {
 
-  url:string = env.baseURL;
+  url:string = environment.API_URL;
   cartProducts: Array<Product> = [];
   totalPrice: number;
   username: string;

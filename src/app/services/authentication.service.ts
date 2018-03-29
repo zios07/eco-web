@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import 'rxjs/add/operator/map'
-import { env } from "../../assets/config/app.config";
 import { JwtHelper } from "angular2-jwt";
 import { Router } from "@angular/router";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class AuthenticationService {
 
-    private url:string = env.baseURL ;
+    private url:string = environment.API_URL ;
     jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(private http:Http, private router: Router){}
