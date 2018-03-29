@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { env } from '../../assets/config/app.config';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class RoleService {
 
-  url:string = env.baseURL;
+  url:string = environment.API_URL;
 
   constructor(private http: HttpClient) { }
 

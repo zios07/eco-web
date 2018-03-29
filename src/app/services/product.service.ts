@@ -1,16 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http"
-import { env } from "../../assets/config/app.config";
 import { AuthHttp } from 'angular2-jwt';
 import "rxjs/add/operator/map";
 import { CartDto } from "../../dto/cartDto";
 import { AuthenticationService } from "./authentication.service";
 import { Product } from '../../domain/product';
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class ProductService {
 
-    url: string = env.baseURL;
+    url: string = environment.API_URL;
 
     constructor(private http: HttpClient, private authService: AuthenticationService) { }
 

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { env } from '../../assets/config/app.config';
 import { post } from 'selenium-webdriver/http';
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserService {
   
-  url: string = env.baseURL;
+  url: string = environment.API_URL;
 
   constructor(private http: Http, private httpClient: HttpClient) { }
 
