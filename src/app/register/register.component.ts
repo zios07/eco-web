@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../../domain/user';
+import { Account } from '../../domain/account';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
 
-  user = { account :{ username:"", password: ""}};
+  user :User = new User();
   confirmPWD: string = "";
 
   constructor(private userService: UserService,
@@ -18,6 +20,8 @@ export class RegisterComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit() {
+    let account:Account = new Account();
+    this.user.account = account;
   }
 
   public register(){
