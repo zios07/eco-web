@@ -14,7 +14,7 @@
 			<td>{{ p.code }}</td>
 			<td>{{ p.label }}</td>
 			<td>{{ p.description }}</td>
-			<td>{{ p.price }}</td>
+			<td>{{ p.price | currency:'USD':'symbol-narrow' }}</td>
 			<td>{{ p.qteStock }}</td>
 			<td>{{ p.brand?.label }}</td>
 			<td>

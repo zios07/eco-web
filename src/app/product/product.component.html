@@ -57,8 +57,12 @@
           class="card" style="width: 15rem;">
           <img [src]="p.imgUrl" alt="Product image" class="card-img-top">
           <div class="card-body">
-            <h4 class="card-title">{{p.label}}</h4>
-            <p class="card-text">{{p.price  | currency:'USD':'symbol-narrow'}}</p>
+            <h4 class="card-title">
+              <a class="product-label-anchor" [routerLink]="['/product/details/', p.id]">{{p.label}}</a>
+            </h4>
+            <p class="card-text price-text">{{p.price  | currency:'USD':'symbol-narrow'}}</p>
+            <p class="card-text stock-quantity-text" [ngClass]="p.qteStock > 100 ? '': 'not-much-left'">{{p.qteStock}} in stock</p>
+            <button class="btn btn-success" [routerLink]="['/product/details/', p.id]">View</button>
             <button class="btn btn-primary" (click)="addToCart(p)">Add to cart</button>
           </div>
         </div>

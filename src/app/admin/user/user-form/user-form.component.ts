@@ -14,7 +14,7 @@ import { Role } from '../../../../domain/role';
 })
 export class UserFormComponent implements OnInit {
 
-  roles: Array<Role>;
+  roles: Role[] = [];
   // user = { account :{ username:"", password: ""}};
   user: User = new User();
   confirmPWD: string = "";
@@ -52,20 +52,15 @@ export class UserFormComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if(id) {
       this.userService.findById(id).subscribe((result: User) => {
-        // console.log(result);
-        // let role = new Role();
-        // role.id = result.role.id;
-        // role.roleCode = result.role.roleCode;
-        // role.roleLabel = result.role.roleLabel;
-        // this.user = new User(result.id, result.firstName, result.lastName, result.email, 
-        //   result.account, role , result.bDate);
         this.user = result;
+        console.log(this.user.bDate);
+        // set selected role. Again, there has to be a better way to do this!
         if(this.roles) {
           const p = this.user;
           let match;
           this.roles.forEach(function(br){
             if(br.id == p.role.id){
-              match = br;
+                match = br;
             }
           })
           this.user.role = match;
