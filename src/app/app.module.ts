@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { DataTableModule } from 'angular5-data-table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -90,6 +91,7 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		TooltipModule.forRoot(),
 		ModalModule.forRoot(),
 		FormsModule,
+		DataTableModule,
 		HttpClientModule,
 		HttpModule,
 		ToastrModule.forRoot(),

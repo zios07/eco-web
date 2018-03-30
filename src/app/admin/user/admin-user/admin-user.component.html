@@ -1,33 +1,78 @@
 <button class="btn btn-primary" routerLink="/admin/users/form">Create new user</button>
 
-<table class="table table-hover">
-	<thead>
-		<th>First Name</th>
-		<th>Last Name</th>
-		<th>Birth Date</th>
-		<th>Email</th>
-		<th>Username</th>
-		<th>Role</th>
-	</thead>
-	<tbody>
-		<tr *ngFor="let u of users">
-			<td>{{ u.firstName }}</td>
-			<td>{{ u.lastName }}</td>
-			<td>{{ u.bDate | date: 'dd-MM-yyyy' }}</td>
-			<td>{{ u.email }}</td>
-			<td>{{ u.account?.username }}</td>
-			<td>{{ u.role?.roleLabel }}</td>
-			<td>
-				<a [routerLink]="['/admin/users/', u.id]">
-					<i class="fa fa-edit"></i>
-				</a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color:red" (click)="deleteUser(u.id)">
-					<i class="fa fa-remove"></i>
-				</a>
-			</td>
-		</tr>
-		<tr *ngIf="users.length == 0">
-			<td>No brands found</td>
-		</tr>
-	</tbody>
-</table>
+<data-table
+	[items] = "items"
+	[itemCount] = "itemsCount"
+	(reload) = "reloadUsers($event)"
+>
+
+	<data-table-column
+		[property] = "'firstName'"
+		[header] = "'First Name'"
+		[sortable] = "true"
+		[resizable] = "true"
+	>
+	</data-table-column>
+
+
+	<data-table-column
+		[property] = "'lastName'"
+		[header] = "'Last Name'"
+		[sortable] = "true"
+		[resizable] = "true"
+	>
+	</data-table-column>
+
+	<data-table-column
+		[property] = "'bDate'"
+		[header] = "'Birth date'"
+		[sortable] = "true"
+		[resizable] = "true"
+	>
+		<ng-template #dataTableCell let-item="item">
+			{{ item.bDate | date: 'dd-MM-yyyy'}}
+		</ng-template>
+	</data-table-column>
+
+	<data-table-column
+		[property] = "'email'"
+		[header] = "'Email'"
+		[sortable] = "true"
+		[resizable] = "true"
+	>
+	</data-table-column>
+
+	<data-table-column
+		[property] = "'account.username'"
+		[header] = "'Username'"
+		[sortable] = "true"
+		[resizable] = "true"
+	>
+		<ng-template #dataTableCell let-item="item">
+			{{ item.account?.username}}
+		</ng-template>
+	</data-table-column>
+
+	<data-table-column
+		[property] = "'role.roleLabel'"
+		[header] = "'Role'"
+		[sortable] = "true"
+		[resizable] = "true"
+	>
+		<ng-template #dataTableCell let-item="item">
+			{{ item.role?.roleLabel}}
+		</ng-template>
+	</data-table-column>
+
+	<data-table-column>
+		<ng-template #dataTableCell let-item="item">
+			<a [routerLink]="['/admin/users/', item.id]">
+				<i class="fa fa-edit"></i>
+			</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a style="color:red" (click)="deleteUser(item.id)">
+				<i class="fa fa-remove"></i>
+			</a>
+		</ng-template>
+	</data-table-column>
+
+</data-table>
