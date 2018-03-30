@@ -4,6 +4,7 @@ import { ProductService } from '../../../services/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { BrandService } from '../../../services/brand.service'
 import { Product } from '../../../../domain/product';
+import { DataTableResource } from 'angular5-data-table';
 
 @Component({
   selector: 'app-admin-product',
@@ -12,10 +13,12 @@ import { Product } from '../../../../domain/product';
 })
 export class AdminProductComponent implements OnInit {
 
-	products: Array<Product> = [];
+	items: Product[] = [];
+	itemsCount: number;
 	products$;
 	page: number = 0;
 	size: number = 10;
+	tableResource: DataTableResource<Product>;
 
 	constructor(private router: Router,
 		private productService: ProductService,
@@ -28,7 +31,7 @@ export class AdminProductComponent implements OnInit {
 
   	loadProducts() {
 		this.productService.loadProducts(this.page, this.size).subscribe((result: any) => {
-			this.products = result.content;
+			this.initializeDataTable(result);
 		}, error => {
 			this.toastr.error(String(error));
 		});
@@ -43,4 +46,17 @@ export class AdminProductComponent implements OnInit {
 		});
 	}
 
+	reloadItems(params) {
+		if(this.tableResource)
+			this.tableResource.query(params)
+				.then(items => this.items = items);
+	}
+
+	initializeDataTable(products: Product[]) {
+		this.tableResource = new DataTableResource(products);
+		this.tableResource.query({offset: 0})
+			.then(items => this.items = items);
+		this.tableResource.count()
+			.then(count => this.itemsCount = count);
+	}
 }

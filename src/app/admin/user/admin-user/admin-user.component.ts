@@ -43,7 +43,7 @@ export class AdminUserComponent implements OnInit {
 		});
 	}
 
-	reloadUsers(params) {
+	reloadItems(params) {
 		if(this.tableResource)
 			this.tableResource.query(params)
 				.then(items => this.items = items);
