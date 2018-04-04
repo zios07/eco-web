@@ -1,25 +1,38 @@
 <button class="btn btn-primary" routerLink="/admin/brands/form">Add new brand</button>
 
-<table class="table table-hover">
-	<thead>
-		<th>Code</th>
-		<th>Label</th>
-	</thead>
-	<tbody>
-		<tr *ngFor="let b of brands">
-			<td>{{ b.code }}</td>
-			<td>{{ b.label }}</td>
-			<td>
-				<a [routerLink]="['/admin/brands/', b.id]">
-					<i class="fa fa-edit"></i>
-				</a> &nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color:red" (click)="deleteBrand(b.id)">
-					<i class="fa fa-remove"></i>
-				</a>
-			</td>
-		</tr>
-		<tr *ngIf="brands.length == 0">
-			<td>No brands found</td>
-		</tr>
-	</tbody>
-</table>
+
+<data-table
+	[items] = "items"
+	[itemCount] = "itemsCount"
+	(reload) = "reloadItems($event)"
+>
+
+	<data-table-column
+		[property] = "'code'"
+		[header] = "'Code'"
+		[sortable] = "true"
+		[resizable] = "true"
+	>
+	</data-table-column>
+
+
+	<data-table-column
+		[property] = "'label'"
+		[header] = "'Label'"
+		[sortable] = "true"
+		[resizable] = "true"
+	>
+	</data-table-column>
+
+	<data-table-column>
+		<ng-template #dataTableCell let-item="item">
+			<a [routerLink]="['/admin/brands/', item.id]">
+				<i class="fa fa-edit"></i>
+			</a> &nbsp;&nbsp;&nbsp;&nbsp;
+			<a style="color:red" (click)="deleteBrand(item.id)">
+				<i class="fa fa-remove"></i>
+			</a>
+		</ng-template>
+	</data-table-column>
+
+</data-table>

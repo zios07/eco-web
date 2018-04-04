@@ -16,7 +16,7 @@ export class ProductService {
 
     loadProducts(page, size) {
         return this.http.get(this.url + "/api/v1/products?page="+page+"&size="+size)
-            .map(response => response);
+            .map((response: any) => response.content);
     }
 
     getProduct( id ) {
