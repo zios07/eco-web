@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { AuthHttp } from 'angular2-jwt';
 import "rxjs/add/operator/map";
-import { CartDto } from "../../dto/cartDto";
+import { CartDto } from "../dto/cartDto";
 import { AuthenticationService } from "./authentication.service";
-import { Product } from '../../domain/product';
+import { Product } from '../domain/product';
 import { environment } from "../../environments/environment";
 
 @Injectable()
@@ -48,7 +48,7 @@ export class ProductService {
 
     search(dto, page, size) {
         return this.http.post(this.url + "/api/v1/products/search?page="+page+"&size="+size , dto)
-            .map(response => response);
+            .map((response: any) => response.content);
     }
 
     uploadPhotos(photos) {
