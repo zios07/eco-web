@@ -11,7 +11,7 @@ export class Product{
     imgUrl: string;
 
     constructor(id?:number, code?:string, label?:string, description?: string, price?:number,
-         brand?: Brand, qteStock?: string, imgUrl?: string) {
+         brand?: Brand, qteStock?: number, imgUrl?: string) {
         this.id = id;
         this.code = code;
         this.label = label;
