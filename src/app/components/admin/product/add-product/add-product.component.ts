@@ -1,0 +1,81 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
+import { ProductService } from '../../../../services/product.service';
+import { ToastrService } from 'ngx-toastr';
+import { Product } from '../../../../domain/product';
+import { BrandService } from '../../../../services/brand.service'
+import 'rxjs/add/operator/take';
+import { Brand } from '../../../../domain/brand';
+
+@Component({
+  selector: 'app-add-product',
+  templateUrl: './add-product.component.html',
+  styleUrls: ['./add-product.component.css']
+})
+export class AddProductComponent implements OnInit {
+
+	brands: Array<Brand> = [];
+	product: Product = new Product();
+
+	constructor(private router: Router,
+				private route: ActivatedRoute,
+				private productService: ProductService,
+				private brandService: BrandService,
+				private toastr: ToastrService) {}
+
+	ngOnInit() {
+		this.loadBrands();
+	}
+
+	uploadPhotos(event) {
+		if(event.files)
+			if (event.files.length < 3 || event.files.length > 7)
+				console.log("errrorrrr");
+			else{
+				this.productService.uploadPhotos(event.files).subscribe(result => {
+					console.log(result);
+				}, error => {
+					this.toastr.error(String(error));
+				});
+			}
+	}
+
+	saveProduct(){
+		this.productService.addProduct(this.product).subscribe(result => {
+			this.toastr.success('Product added successfully !');
+			this.router.navigate(['/admin/products']);
+		});
+	}
+
+	loadBrands(){
+		this.brandService.loadBrands().subscribe((result:Array<Brand>) => {
+			this.brands = result;
+			this.loadProductToEdit();
+		}, error => {
+			this.toastr.error(String(error));
+		})
+	}
+
+	loadProductToEdit(){
+		let id = this.route.snapshot.paramMap.get('id');
+		if (id) {
+			this.productService.getProduct(id).take(1).subscribe((result: Product) => {
+				this.product = result;
+				// There has to be a better way to do the 2 way binding .. 
+				if(this.brands) {
+					const p = this.product;
+					let match;
+					this.brands.forEach(function(br){
+						if(br.id == p.brand.id){
+							match = br;
+						}
+					})
+					this.product.brand = match;
+				}
+			}, error => {
+				this.toastr.error(String(error));
+			});
+		}
+	}
+
+}

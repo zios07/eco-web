@@ -11,49 +11,50 @@ import { DataTableModule } from 'angular5-data-table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { RegisterComponent } from './register/register.component';
-import { ProductComponent } from './product/product.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ProductComponent } from './components/product/product.component';
 import { ProductService } from './services/product.service';
 import { BrandService } from './services/brand.service';
 import { HttpModule, RequestOptions, Http } from '@angular/http';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './components/nav/nav.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
-import { AuthGuard } from './auth-guard.service';
-import { CartComponent } from './cart/cart.component';
+import { AuthGuard } from './guards/auth.guard';
+import { CartComponent } from './components/cart/cart.component';
 import { ToastrModule } from 'ngx-toastr';
-import { AddProductComponent } from './admin/product/add-product/add-product.component';
+import { AddProductComponent } from './components/admin/product/add-product/add-product.component';
 import { SliderModule } from 'primeng/slider';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RequestInterceptor } from './services/request-interceptor.service';
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { AdminBrandComponent } from './admin/brand/admin-brand/admin-brand.component';
-import { AddBrandComponent } from './admin/brand/add-brand/add-brand.component';
-import { AdminProductComponent } from './admin/product/admin-product/admin-product.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { AdminBrandComponent } from './components/admin/brand/admin-brand/admin-brand.component';
+import { AddBrandComponent } from './components/admin/brand/add-brand/add-brand.component';
+import { AdminProductComponent } from './components/admin/product/admin-product/admin-product.component';
 import { UserService } from './services/user.service';
-import { AdminUserComponent } from './admin/user/admin-user/admin-user.component';
-import { UserFormComponent } from './admin/user/user-form/user-form.component';
+import { AdminUserComponent } from './components/admin/user/admin-user/admin-user.component';
+import { UserFormComponent } from './components/admin/user/user-form/user-form.component';
 import { RoleService } from './services/role.service';
-import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent},
 	{ path: 'register', component: RegisterComponent},
 	{ path: 'cart', component: CartComponent },
-	{ path: 'admin/products/form', component: AddProductComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/products/:id', component: AddProductComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/products', component: AdminProductComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/brands/form', component: AddBrandComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/brands/:id', component: AddBrandComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/brands', component: AdminBrandComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/users/form', component: UserFormComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/users/:id', component: UserFormComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/users', component: AdminUserComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/products/form', component: AddProductComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/products/:id', component: AddProductComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/products', component: AdminProductComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/brands/form', component: AddBrandComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/brands/:id', component: AddBrandComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/brands', component: AdminBrandComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/users/form', component: UserFormComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/users/:id', component: UserFormComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/users', component: AdminUserComponent, canActivate: [AuthGuard, AdminGuard] },
 	{ path: 'products', component: ProductComponent, canActivate: [AuthGuard] },
 	{ path: 'product/details/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
 	{ path: 'contactus', component: ContactUsComponent },
@@ -103,6 +104,7 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		ProductService,
 		BrandService,
 		AuthGuard,
+		AdminGuard,
 		AuthenticationService,
 		{
 			provide: AuthHttp,
