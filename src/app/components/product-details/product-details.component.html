@@ -1,10 +1,14 @@
-<p>
-    {{product.id}}
-    {{product.label}}
-    {{product.code}}
-    {{product.description}}
-    {{product.brand.label}}
-    {{product.qteStock}}
-    {{product.price}}
-    {{product.imgUrl}}
-</p>
+<div class="card-wrapper">
+    <h2 class="text-center mb-5"></h2>
+    <div class="card">
+        <img [src]="product.imgUrl" alt="" class="card-img-top">
+        <div class="card-body">
+            <h4 class="card-title"> {{ product.label }}</h4>
+            <div class="card-text">
+                <div> {{ product.description }}</div>
+                <div> {{ product.price | currency:'USD':'symbol-narrow' }}</div>
+                <div class="card-text stock-quantity-text" [ngClass]="product.qteStock > 100 ? '': 'not-much-left'">{{product.qteStock}} left</div>
+            </div>
+        </div>			
+    </div>
+</div>
