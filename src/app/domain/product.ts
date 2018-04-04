@@ -5,7 +5,7 @@ export class Product{
     code: string;
     label: string;
     description: string;
-    qteStock: string;
+    qteStock: number;
     price: number;
     brand: Brand;
     imgUrl: string;
