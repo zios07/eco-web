@@ -39,21 +39,22 @@ import { AdminUserComponent } from './components/admin/user/admin-user/admin-use
 import { UserFormComponent } from './components/admin/user/user-form/user-form.component';
 import { RoleService } from './services/role.service';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent},
 	{ path: 'register', component: RegisterComponent},
 	{ path: 'cart', component: CartComponent },
-	{ path: 'admin/products/form', component: AddProductComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/products/:id', component: AddProductComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/products', component: AdminProductComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/brands/form', component: AddBrandComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/brands/:id', component: AddBrandComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/brands', component: AdminBrandComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/users/form', component: UserFormComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/users/:id', component: UserFormComponent, canActivate: [AuthGuard] },
-	{ path: 'admin/users', component: AdminUserComponent, canActivate: [AuthGuard] },
+	{ path: 'admin/products/form', component: AddProductComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/products/:id', component: AddProductComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/products', component: AdminProductComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/brands/form', component: AddBrandComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/brands/:id', component: AddBrandComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/brands', component: AdminBrandComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/users/form', component: UserFormComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/users/:id', component: UserFormComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/users', component: AdminUserComponent, canActivate: [AuthGuard, AdminGuard] },
 	{ path: 'products', component: ProductComponent, canActivate: [AuthGuard] },
 	{ path: 'product/details/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
 	{ path: 'contactus', component: ContactUsComponent },
@@ -103,6 +104,7 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		ProductService,
 		BrandService,
 		AuthGuard,
+		AdminGuard,
 		AuthenticationService,
 		{
 			provide: AuthHttp,
