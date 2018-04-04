@@ -3,7 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TemplateRef } from '@angular/core/src/linker/template_ref';
 import { AuthenticationService } from '../../services/authentication.service';
 import { JwtHelper } from 'angular2-jwt';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,8 @@ export class LoginComponent {
   jwtHelper: JwtHelper = new JwtHelper();
   
   invalidLogin: boolean;
-  constructor(private authService: AuthenticationService, 
+  constructor(private authService: AuthenticationService,
+              private route: ActivatedRoute, 
               private router: Router){}
 
   onLogin(credentials){
@@ -24,7 +25,8 @@ export class LoginComponent {
       if(token) {
         localStorage.setItem('token', token);
         localStorage.setItem('username', credentials.username);
-        this.router.navigate(['/']);
+        let srcUrl = this.route.snapshot.queryParamMap.get("src");
+        this.router.navigate([srcUrl ||'/']);
       }
         
     }, error => {
