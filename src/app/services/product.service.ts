@@ -6,13 +6,15 @@ import { CartDto } from "../dto/cartDto";
 import { AuthenticationService } from "./authentication.service";
 import { Product } from '../domain/product';
 import { environment } from "../../environments/environment";
+import { UUID } from 'angular2-uuid';
 
 @Injectable()
 export class ProductService {
 
     url: string = environment.API_URL;
 
-    constructor(private http: HttpClient, private authService: AuthenticationService) { }
+    constructor(private http: HttpClient, 
+                private authService: AuthenticationService) { }
 
     loadProducts(page, size) {
         return this.http.get(this.url + "/api/v1/products?page="+page+"&size="+size)
@@ -52,24 +54,14 @@ export class ProductService {
     }
 
     uploadPhotos(photos) {
-        // console.log(photos);
-        // let fds: Array<FormData> = [];
-        // for(let index in photos) {
-        //     let fd = new FormData();
-        //     fd.append('photo', photos[index]);
-        //     fds[index] = fd;
-        // }
-        // console.log(fds);
         let fd = new FormData();
-        fd.append('photos', photos);
+        fd.append("uuid", localStorage.getItem("uuid"));
+        for(let i = 0 ; i < photos.length ; i++ ) {
+            var blob = new Blob([photos[i]], { type: "application/json"});
+            fd.append('photos', blob , photos[i].name);
+        }
         return this.http.post(this.url + "/api/v1/products/add/photo/upload", fd)
             .map(response => response);
-       //  let fd = new FormData();
-       //  fd.append('photo', photos[0]);
-       // return this.http.post(this.url + "/api/v1/products/add/photo/upload", fd)
-       //      .map(response => response);
-        // return this.http.post(this.url + "/api/v1/products/add/photo/upload", photos)
-        //     .map(response => response);
     }
 
     deleteProduct(id) {

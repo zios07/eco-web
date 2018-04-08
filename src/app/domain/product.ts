@@ -1,17 +1,16 @@
 import { Brand } from "./brand";
 
 export class Product{
-    id: number;
+    id: string;
     code: string;
     label: string;
     description: string;
     qteStock: number;
     price: number;
     brand: Brand;
-    imgUrl: string;
 
-    constructor(id?:number, code?:string, label?:string, description?: string, price?:number,
-         brand?: Brand, qteStock?: number, imgUrl?: string) {
+    constructor(id?:string, code?:string, label?:string, description?: string, price?:number,
+         brand?: Brand, qteStock?: number) {
         this.id = id;
         this.code = code;
         this.label = label;
@@ -19,7 +18,6 @@ export class Product{
         this.price = price;
         this.brand = brand;
         this.qteStock = qteStock;
-        this.imgUrl = imgUrl;
     }
 
     public getCode(){
@@ -42,7 +40,4 @@ export class Product{
         return this.brand;
     }
 
-    public getImgUrl() {
-        return this.imgUrl;
-    }
 }
