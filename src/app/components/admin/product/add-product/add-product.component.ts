@@ -6,6 +6,7 @@ import { Product } from '../../../../domain/product';
 import { BrandService } from '../../../../services/brand.service'
 import 'rxjs/add/operator/take';
 import { Brand } from '../../../../domain/brand';
+import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-add-product',
@@ -25,12 +26,14 @@ export class AddProductComponent implements OnInit {
 
 	ngOnInit() {
 		this.loadBrands();
+		this.generateUUID();
 	}
 
 	uploadPhotos(event) {
+		console.log(event);
 		if(event.files)
 			if (event.files.length < 3 || event.files.length > 7)
-				console.log("errrorrrr");
+				this.toastr.error("You must select between 3 and 7 images");
 			else{
 				this.productService.uploadPhotos(event.files).subscribe(result => {
 					console.log(result);
@@ -76,6 +79,12 @@ export class AddProductComponent implements OnInit {
 				this.toastr.error(String(error));
 			});
 		}
+	}
+
+	generateUUID() {
+		localStorage.removeItem("uuid");
+		let uuid = UUID.UUID();
+		localStorage.setItem("uuid", uuid);
 	}
 
 }
