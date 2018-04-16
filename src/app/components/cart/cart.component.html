@@ -49,3 +49,7 @@
   <h3 align="center"> Cart empty </h3>
   <button class="btn btn-primary" routerLink="/products">Do some shopping ?</button>
 </div>
+
+<div *ngIf="cartProducts.length !== 0" class="container">
+  <button class="btn btn-success float-right" (click)="checkout()">Checkout</button>
+</div>

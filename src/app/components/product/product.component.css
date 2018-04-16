@@ -1,6 +1,7 @@
-.products-container {
+/* .products-container {
     margin-top: 40px;
-}
+} */
+
 .product-item {
     margin-bottom: 50px;
 }
@@ -20,4 +21,25 @@ td {
 }
 .stock-quantity-text, .price-text {
 	font-weight: 500
+}
+
+.wrapper {
+    margin: 0 auto;
+}
+
+.search-container    {
+    width: 30%;
+    /* height: 400px; */
+    float: left;
+}
+
+.product-container  {
+    /* width: 600px; */
+    /* height: 400px; */
+    /* margin-left: 200px; */
+}
+
+.container {
+	max-width: 1570px !important;
+	/* width: 100% !important; */
 }

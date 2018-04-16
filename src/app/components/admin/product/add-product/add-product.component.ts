@@ -30,7 +30,6 @@ export class AddProductComponent implements OnInit {
 	}
 
 	uploadPhotos(event) {
-		console.log(event);
 		if(event.files)
 			if (event.files.length < 3 || event.files.length > 7)
 				this.toastr.error("You must select between 3 and 7 images");

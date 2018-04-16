@@ -27,6 +27,7 @@ export class ProductService {
     }
 
     addProduct(product) {
+        product.uuid = localStorage.getItem('uuid');
         return this.http.post(this.url + "/api/v1/products", product)
             .map(response => response);
     }
