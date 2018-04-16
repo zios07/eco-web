@@ -71,6 +71,9 @@ export class CartComponent {
     });
   }
 
+  checkout() {
+    this.toastr.info(" not implemented yet !");
+  }
 
   ngOnInit() {
     this.username = this.authService.getConnectedUsername();

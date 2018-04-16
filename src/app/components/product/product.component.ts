@@ -32,6 +32,7 @@ export class ProductComponent implements OnInit {
   loadProducts(page, size) {
     this.productService.loadProducts(page, size).subscribe((result: any) => {
       this.products = result;
+      this.setMainImageForeachProduct();
     })
   }
 
@@ -61,6 +62,7 @@ export class ProductComponent implements OnInit {
   onSearch() {
     this.productService.search(this.productSearchDto, this.currentPage, this.size).subscribe((result: any) => {
       this.products = result;
+      this.setMainImageForeachProduct();
     }, error => {
       this.toastr.error(String(error));
     });
@@ -73,4 +75,15 @@ export class ProductComponent implements OnInit {
       this.productSearchDto.brands.splice(this.productSearchDto.brands.indexOf(brand), 1);
   }
 
+  setMainImageForeachProduct() {
+    if(this.products) {
+      this.products.forEach(product => {
+        if(product.images)
+          product.images.forEach(image => {
+            if(image.main) 
+              product.mainImage = image;
+          });
+      });
+    }
+  }
 }

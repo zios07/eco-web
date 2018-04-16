@@ -8,9 +8,12 @@ export class Product{
     qteStock: number;
     price: number;
     brand: Brand;
+    uuid: string;
+    images: any;
+    mainImage: any;
 
     constructor(id?:string, code?:string, label?:string, description?: string, price?:number,
-         brand?: Brand, qteStock?: number) {
+         brand?: Brand, qteStock?: number, uuid?: string) {
         this.id = id;
         this.code = code;
         this.label = label;
@@ -18,6 +21,7 @@ export class Product{
         this.price = price;
         this.brand = brand;
         this.qteStock = qteStock;
+        this.uuid = uuid;
     }
 
     public getCode(){
@@ -38,6 +42,10 @@ export class Product{
 
     public getBrand() {
         return this.brand;
+    }
+
+    public getUuid() {
+        return this.uuid;
     }
 
 }

@@ -12,6 +12,7 @@ import { Product } from '../../domain/product';
 export class ProductDetailsComponent implements OnInit {
 
   product: Product = new Product();
+  images = [];
 
   constructor(private productService: ProductService,
               private toastr: ToastrService,
@@ -27,6 +28,15 @@ export class ProductDetailsComponent implements OnInit {
     if(id) {
       this.productService.getProduct(id).subscribe((result: Product) => {
         this.product = result;
+        if(this.product && this.product.images) {
+          this.product.images.forEach(image => {
+            this.images.push({
+              source:"data:image/jpeg;base64,"+image.content 
+            });
+            if(image.main)
+              this.product.mainImage = image;
+          });
+        }
       }, error  => {
         this.toastr.error(String(error));
       })

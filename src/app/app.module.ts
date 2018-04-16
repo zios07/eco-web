@@ -40,6 +40,8 @@ import { UserFormComponent } from './components/admin/user/user-form/user-form.c
 import { RoleService } from './services/role.service';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { AdminGuard } from './guards/admin.guard';
+import { GalleriaModule } from 'primeng/galleria';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -95,10 +97,13 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		DataTableModule,
 		HttpClientModule,
 		HttpModule,
+		
 		ToastrModule.forRoot(),
 		SliderModule,
 		FileUploadModule,
-		NgbModule.forRoot()
+		NgbModule.forRoot(),
+		GalleriaModule,
+		NgxGalleryModule
 	],
 	providers: [
 		ProductService,
