@@ -9,3 +9,7 @@
 .dropdown-item, .nav-link {
     cursor: pointer;
 }
+
+.dropdown-menu {
+    left: -75px !important;
+}

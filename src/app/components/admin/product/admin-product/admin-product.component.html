@@ -1,76 +1,78 @@
-<button class="btn btn-primary" routerLink="/admin/products/form">Add new product</button>
+<div class="custom-container">
+	<button class="btn btn-primary" routerLink="/admin/products/form">Add new product</button>
 
 
-<data-table
-	[items] = "items"
-	[itemCount] = "itemsCount"
-	(reload) = "reloadItems($event)"
->
-
-	<data-table-column
-		[property] = "'code'"
-		[header] = "'Code'"
-		[sortable] = "true"
-		[resizable] = "true"
+	<data-table
+		[items] = "items"
+		[itemCount] = "itemsCount"
+		(reload) = "reloadItems($event)"
 	>
-	</data-table-column>
+
+		<data-table-column
+			[property] = "'code'"
+			[header] = "'Code'"
+			[sortable] = "true"
+			[resizable] = "true"
+		>
+		</data-table-column>
 
 
-	<data-table-column
-		[property] = "'label'"
-		[header] = "'Label'"
-		[sortable] = "true"
-		[resizable] = "true"
-	>
-	</data-table-column>
+		<data-table-column
+			[property] = "'label'"
+			[header] = "'Label'"
+			[sortable] = "true"
+			[resizable] = "true"
+		>
+		</data-table-column>
 
-	<data-table-column
-		[property] = "'description'"
-		[header] = "'Description'"
-		[sortable] = "true"
-		[resizable] = "true"
-	>
-	</data-table-column>
+		<data-table-column
+			[property] = "'description'"
+			[header] = "'Description'"
+			[sortable] = "true"
+			[resizable] = "true"
+		>
+		</data-table-column>
 
-	<data-table-column
-		[property] = "'qteStock'"
-		[header] = "'Store quantity'"
-		[sortable] = "true"
-		[resizable] = "true"
-	>
-	</data-table-column>
+		<data-table-column
+			[property] = "'qteStock'"
+			[header] = "'Store quantity'"
+			[sortable] = "true"
+			[resizable] = "true"
+		>
+		</data-table-column>
 
-	<data-table-column
-		[property] = "'price'"
-		[header] = "'Price'"
-		[sortable] = "true"
-		[resizable] = "true"
-	>
-		<ng-template #dataTableCell let-item="item">
-			{{ item.price | currency:'USD':'symbol-narrow' }}
-		</ng-template>
-	</data-table-column>
+		<data-table-column
+			[property] = "'price'"
+			[header] = "'Price'"
+			[sortable] = "true"
+			[resizable] = "true"
+		>
+			<ng-template #dataTableCell let-item="item">
+				{{ item.price | currency:'USD':'symbol-narrow' }}
+			</ng-template>
+		</data-table-column>
 
-	<data-table-column
-		[header] = "'Brand'"
-		[sortable] = "true"
-		[resizable] = "true"
-	>
-		<ng-template #dataTableCell let-item="item">
-			{{ item.brand?.label }}
-		</ng-template>
-	</data-table-column>
+		<data-table-column
+			[header] = "'Brand'"
+			[sortable] = "true"
+			[resizable] = "true"
+		>
+			<ng-template #dataTableCell let-item="item">
+				{{ item.brand?.label }}
+			</ng-template>
+		</data-table-column>
 
 
-	<data-table-column>
-		<ng-template #dataTableCell let-item="item">
-			<a [routerLink]="['/admin/products/', item.id]">
-				<i class="fa fa-edit"></i>
-			</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a style="color:red" (click)="deleteProduct(item.id)">
-				<i class="fa fa-remove"></i>
-			</a>
-		</ng-template>
-	</data-table-column>
+		<data-table-column>
+			<ng-template #dataTableCell let-item="item">
+				<a [routerLink]="['/admin/products/', item.id]">
+					<i class="fa fa-edit"></i>
+				</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a style="color:red" (click)="deleteProduct(item.id)">
+					<i class="fa fa-remove"></i>
+				</a>
+			</ng-template>
+		</data-table-column>
 
-</data-table>
+	</data-table>
+</div>
