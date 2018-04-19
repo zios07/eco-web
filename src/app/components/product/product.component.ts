@@ -4,6 +4,7 @@ import { Product } from '../../domain/product';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { BrandService } from '../../services/brand.service'
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -14,25 +15,43 @@ export class ProductComponent implements OnInit {
 
   products: Array<Product> = [];
   brands: Array<any> = [];
-  productSearchDto: any = { brands: Array(), minPrice: 0, maxPrice: 10000 };
+  productSearchDto: any = { brands: Array(), minPrice: 0, maxPrice: 100000 };
   currentPage: number = 0;
   size: number = 100;
-  rangeValues: number[] = [0, 10000];
+  rangeValues: number[] = [0, 100000];
+  username: string;
+  connectedUserCart;
+  $products;
 
   constructor(private productService: ProductService, 
               private authService: AuthenticationService,
               private toastr:ToastrService,
-              private brandService: BrandService) { }
+              private brandService: BrandService,
+              private cartService: CartService) { }
 
   ngOnInit() {
+    this.username = this.authService.getConnectedUsername();
     this.loadProducts(this.currentPage, this.size);
     this.loadBrands();
+    this.loadConnectedUserCart();
+  }
+
+  loadConnectedUserCart() {
+    this.cartService.loadCart(this.username).subscribe((result: any) => {
+      this.connectedUserCart = result;
+    }, error => {
+        if(error.status !== 404)
+          this.toastr.error(error);
+      }
+    );
   }
 
   loadProducts(page, size) {
-    this.productService.loadProducts(page, size).subscribe((result: any) => {
+    this.$products = this.productService.loadProducts(page, size);
+    this.$products.subscribe((result: any) => {
       this.products = result;
       this.setMainImageForeachProduct();
+      this.updateProductAvailability(result);
     })
   }
 
@@ -44,7 +63,6 @@ export class ProductComponent implements OnInit {
       this.toastr.error(String(error));
     });
   }
-
 
   loadBrands() {
     this.brandService.loadBrands().subscribe((result:any) => {
@@ -63,6 +81,7 @@ export class ProductComponent implements OnInit {
     this.productService.search(this.productSearchDto, this.currentPage, this.size).subscribe((result: any) => {
       this.products = result;
       this.setMainImageForeachProduct();
+      this.updateProductAvailability(result);
     }, error => {
       this.toastr.error(String(error));
     });
@@ -74,6 +93,24 @@ export class ProductComponent implements OnInit {
     else
       this.productSearchDto.brands.splice(this.productSearchDto.brands.indexOf(brand), 1);
   }
+
+  
+  updateProductAvailability(productList) {
+    let cartProducts = this.connectedUserCart.products;
+    cartProducts.forEach((cp : any) => {
+      let pCart:Product = cp.product;
+      if(productList) {
+        productList.forEach(product => {
+          if(pCart.id == product.id) {
+            if(product.qteStock <= cp.quantity) {
+              product.unavailable = true;
+            }
+          }   
+        });
+      }
+    })
+  }
+
 
   setMainImageForeachProduct() {
     if(this.products) {

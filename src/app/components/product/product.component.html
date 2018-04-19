@@ -24,7 +24,7 @@
                 <p-slider [(ngModel)]="rangeValues" 
                   [range]="true"
                   [min]="0"
-                  [max]="10000"
+                  [max]="100000"
                   (onChange)="priceRangeChanged($event)"
                   ></p-slider>
       
@@ -69,7 +69,9 @@
                 <p class="card-text price-text">{{p.price  | currency:'USD':'symbol-narrow'}}</p>
                 <p class="card-text stock-quantity-text" [ngClass]="p.qteStock > 100 ? '': 'not-much-left'">{{p.qteStock}} in stock</p>
                 <button class="btn btn-success" [routerLink]="['/product/details/', p.id]">View</button>
-                <button class="btn btn-primary" (click)="addToCart(p)">Add to cart</button>
+                <button class="btn btn-primary" [disabled]="p.unavailable" (click)="addToCart(p)">Add to cart</button>
+                <br>
+                <span class="alert-unavailable" *ngIf="p.unavailable">* You cannot have more than {{p.qteStock}} items in your shopping cart</span>
               </div>
             </div>
           </div>

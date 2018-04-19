@@ -42,6 +42,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { AdminGuard } from './guards/admin.guard';
 import { GalleriaModule } from 'primeng/galleria';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { CartService } from './services/cart.service';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -123,7 +124,8 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		},  
 		HttpClient,
 		UserService,
-		RoleService
+		RoleService,
+		CartService
 	],	
 	bootstrap: [AppComponent]
 })
