@@ -6,6 +6,7 @@ import { Product } from '../../domain/product';
 import { ProductService } from '../../services/product.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { environment } from '../../../environments/environment';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,22 +15,29 @@ import { environment } from '../../../environments/environment';
 })
 export class CartComponent {
 
-  url:string = environment.API_URL;
   cartProducts: Array<Product> = [];
   totalPrice: number;
   username: string;
+  $cart;  
 
   constructor(private http: AuthHttp, 
               private toastr: ToastrService,
               private productService: ProductService,
-              private authService: AuthenticationService) { }
+              private authService: AuthenticationService,
+              private cartService: CartService) { }
+            
+  ngOnInit() {
+    this.username = this.authService.getConnectedUsername();
+    this.loadCart();
+  }
 
-  loadCart(){ 
-    this.http.get(this.url + "/api/v1/cart/user/" + this.username)
-      .map(response => response.json())
-      .subscribe(result => {
-       this.cartProducts = result.products;
+  // Product as parameter to update its availability to add to cart (quantity in store)
+  loadCart(product?: Product){ 
+    this.$cart = this.cartService.loadCart(this.username);
+    this.$cart.subscribe((result: any) => {
+      this.cartProducts = result.products;
       this.calculateTotalPrice(this.cartProducts);
+      this.updateProductsAvailability();
       }, error => {
         if(error.status !== 404)
           this.toastr.error(error);
@@ -46,7 +54,7 @@ export class CartComponent {
 
   plusProduct(product){
     this.productService.addProductToCart(product, this.username).subscribe(result => {
-      this.loadCart();
+      this.loadCart(product);
     }, error => {
       this.toastr.error(String(error));
     });
@@ -71,13 +79,23 @@ export class CartComponent {
     });
   }
 
-  checkout() {
-    this.toastr.info(" not implemented yet !");
+  updateProductsAvailability() {
+    this.$cart.subscribe((result: any) => {
+      this.cartProducts = result.products;
+      this.cartProducts.forEach((cp : any) => {
+        let product:Product = cp.product;
+        if(product.qteStock <= cp.quantity) {
+          cp.unavailable = true;
+        }
+      })
+    }, error => {
+      if(error.status !== 404)
+        this.toastr.error(error);
+    });
   }
 
-  ngOnInit() {
-    this.username = this.authService.getConnectedUsername();
-    this.loadCart();
+  checkout() {
+    this.toastr.info(" not implemented yet !");
   }
   
 }
