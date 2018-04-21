@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
+  // Product service URL
   API_URL: "http://localhost:9095"
 };

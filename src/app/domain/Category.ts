@@ -1,14 +1,12 @@
-export class Brand {
+export class Category {
     id:number;
     code:string;
     label:string;
-    country:string;
 
-    constructor(id?:number, code?:string,label?:string,country?:string) {
+    constructor(id?:number, code?:string,label?:string) {
         this.id = id;
         this.code = code;
         this.label = label;
-        this.country = country;
     }
 
     public getCode(){
@@ -17,9 +15,5 @@ export class Brand {
 
     public getLabel(){
         return this.label;
-    }
-
-    public getCountry(){
-        return this.country;
     }
 }

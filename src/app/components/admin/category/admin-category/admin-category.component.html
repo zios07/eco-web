@@ -1,5 +1,5 @@
 <div class="custom-container">
-	<button class="btn btn-primary" routerLink="/admin/brands/form">Add new brand</button>
+	<button class="btn btn-primary" routerLink="/admin/categories/form">Add new category</button>
 
 
 	<data-table
@@ -28,10 +28,10 @@
 
 		<data-table-column>
 			<ng-template #dataTableCell let-item="item">
-				<a [routerLink]="['/admin/brands/', item.id]">
+				<a [routerLink]="['/admin/categories/', item.id]">
 					<i class="fa fa-edit"></i>
 				</a> &nbsp;&nbsp;&nbsp;&nbsp;
-				<a style="color:red" (click)="deleteBrand(item.id)">
+				<a style="color:red" (click)="deleteCategory(item.id)">
 					<i class="fa fa-remove"></i>
 				</a>
 			</ng-template>

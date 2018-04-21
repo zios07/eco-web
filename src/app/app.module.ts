@@ -43,7 +43,11 @@ import { AdminGuard } from './guards/admin.guard';
 import { GalleriaModule } from 'primeng/galleria';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { CartService } from './services/cart.service';
+import { CategoryFormComponent } from './components/admin/category/category-form/category-form.component';
+import { CategoryService } from './services/category.service';
+import { AdminCategoryComponent } from './components/admin/category/admin-category/admin-category.component';
 
+// TODO: Export a const
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'login', component: LoginComponent},
@@ -58,6 +62,9 @@ const appRoutes: Routes = [
 	{ path: 'admin/users/form', component: UserFormComponent, canActivate: [AuthGuard, AdminGuard] },
 	{ path: 'admin/users/:id', component: UserFormComponent, canActivate: [AuthGuard, AdminGuard] },
 	{ path: 'admin/users', component: AdminUserComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/categories/form', component: CategoryFormComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/categories/:id', component: CategoryFormComponent, canActivate: [AuthGuard, AdminGuard] },
+	{ path: 'admin/categories', component: AdminCategoryComponent, canActivate: [AuthGuard, AdminGuard] },
 	{ path: 'products', component: ProductComponent, canActivate: [AuthGuard] },
 	{ path: 'product/details/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
 	{ path: 'contactus', component: ContactUsComponent },
@@ -85,7 +92,9 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		AdminProductComponent,
 		AdminUserComponent,
 		UserFormComponent,
-		ProductDetailsComponent
+		ProductDetailsComponent,
+		AdminCategoryComponent,
+		CategoryFormComponent
 	],
 	imports: [
 		BrowserModule, 
@@ -125,7 +134,8 @@ export function authHttpServiceFactory(http:Http, options: RequestOptions){
 		HttpClient,
 		UserService,
 		RoleService,
-		CartService
+		CartService,
+		CategoryService
 	],	
 	bootstrap: [AppComponent]
 })
