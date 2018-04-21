@@ -1,4 +1,5 @@
 import { Brand } from "./brand";
+import { Category } from "./Category";
 
 export class Product{
     id: string;
@@ -11,9 +12,10 @@ export class Product{
     uuid: string;
     images: any;
     mainImage: any;
+    category: Category;
 
     constructor(id?:string, code?:string, label?:string, description?: string, price?:number,
-         brand?: Brand, qteStock?: number, uuid?: string) {
+         brand?: Brand, qteStock?: number, uuid?: string, category?: Category) {
         this.id = id;
         this.code = code;
         this.label = label;
@@ -22,6 +24,7 @@ export class Product{
         this.brand = brand;
         this.qteStock = qteStock;
         this.uuid = uuid;
+        this.category = category;
     }
 
     public getCode(){
@@ -46,6 +49,10 @@ export class Product{
 
     public getUuid() {
         return this.uuid;
+    }
+
+    public getCategory() {
+        return this.category;
     }
 
 }

@@ -7,6 +7,8 @@ import { BrandService } from '../../../../services/brand.service'
 import 'rxjs/add/operator/take';
 import { Brand } from '../../../../domain/brand';
 import { UUID } from 'angular2-uuid';
+import { Category } from '../../../../domain/Category';
+import { CategoryService } from '../../../../services/category.service';
 
 @Component({
   selector: 'app-add-product',
@@ -16,16 +18,19 @@ import { UUID } from 'angular2-uuid';
 export class AddProductComponent implements OnInit {
 
 	brands: Array<Brand> = [];
+	categories: Array<Category> = [];
 	product: Product = new Product();
 
 	constructor(private router: Router,
 				private route: ActivatedRoute,
 				private productService: ProductService,
 				private brandService: BrandService,
+				private categoryService: CategoryService,
 				private toastr: ToastrService) {}
 
 	ngOnInit() {
 		this.loadBrands();
+		this.loadCategories();
 		this.generateUUID();
 	}
 
@@ -52,6 +57,15 @@ export class AddProductComponent implements OnInit {
 	loadBrands(){
 		this.brandService.loadBrands().subscribe((result:Array<Brand>) => {
 			this.brands = result;
+			this.loadProductToEdit();
+		}, error => {
+			this.toastr.error(String(error));
+		})
+	}
+
+	loadCategories(){
+		this.categoryService.loadCategories().subscribe((result:Array<Category>) => {
+			this.categories = result;
 			this.loadProductToEdit();
 		}, error => {
 			this.toastr.error(String(error));
