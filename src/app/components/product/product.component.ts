@@ -59,6 +59,11 @@ export class ProductComponent implements OnInit {
     let username:string = this.authService.getConnectedUsername();
     this.productService.addProductToCart(product, username).subscribe(result => {
       this.toastr.success("Product added to cart");
+      this.products.forEach(p => {
+        if(p.id == product.id) {
+          product.unavailable = true;
+        }
+      });
     }, error => {
       this.toastr.error(String(error));
     });
@@ -94,7 +99,6 @@ export class ProductComponent implements OnInit {
       this.productSearchDto.brands.splice(this.productSearchDto.brands.indexOf(brand), 1);
   }
 
-  
   updateProductAvailability(productList) {
     let cartProducts = this.connectedUserCart.products;
     cartProducts.forEach((cp : any) => {
@@ -109,8 +113,8 @@ export class ProductComponent implements OnInit {
         });
       }
     })
+    console.log(productList);
   }
-
 
   setMainImageForeachProduct() {
     if(this.products) {

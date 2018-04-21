@@ -22,6 +22,7 @@
               <a class="dropdown-item" routerLink="admin/users" *ngIf="authService.isAdmin()">Manage users</a>
               <a class="dropdown-item" routerLink="admin/products" *ngIf="authService.isAdmin()">Manage products</a>
               <a class="dropdown-item" routerLink="admin/brands" *ngIf="authService.isAdmin()">Manage brands</a>
+              <a class="dropdown-item" routerLink="admin/categories" *ngIf="authService.isAdmin()">Manage categories</a>
               <a class="dropdown-item"
                 *ngIf="authService.isLoggedIn()" 
                 (click)="onLogout(registerTemplate)">
