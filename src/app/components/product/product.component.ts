@@ -60,9 +60,13 @@ export class ProductComponent implements OnInit {
     this.productService.addProductToCart(product, username).subscribe(result => {
       this.toastr.success("Product added to cart");
       this.products.forEach(p => {
-        if(p.id == product.id) {
-          product.unavailable = true;
-        }
+        this.cartService.loadCart(username).subscribe((cart: any) => {
+          cart.products.forEach(cartProduct => {
+            if(cartProduct.product.id == product.id && cartProduct.quantity >= product.qteStock) {
+              product.unavailable = true;
+            }
+          });
+        })
       });
     }, error => {
       this.toastr.error(String(error));
@@ -113,7 +117,6 @@ export class ProductComponent implements OnInit {
         });
       }
     })
-    console.log(productList);
   }
 
   setMainImageForeachProduct() {

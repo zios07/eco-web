@@ -46,30 +46,7 @@ import { CartService } from './services/cart.service';
 import { CategoryFormComponent } from './components/admin/category/category-form/category-form.component';
 import { CategoryService } from './services/category.service';
 import { AdminCategoryComponent } from './components/admin/category/admin-category/admin-category.component';
-
-// TODO: Export a const
-const appRoutes: Routes = [
-	{ path: '', component: HomeComponent },
-	{ path: 'login', component: LoginComponent},
-	{ path: 'register', component: RegisterComponent},
-	{ path: 'cart', component: CartComponent },
-	{ path: 'admin/products/form', component: AddProductComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/products/:id', component: AddProductComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/products', component: AdminProductComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/brands/form', component: AddBrandComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/brands/:id', component: AddBrandComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/brands', component: AdminBrandComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/users/form', component: UserFormComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/users/:id', component: UserFormComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/users', component: AdminUserComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/categories/form', component: CategoryFormComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/categories/:id', component: CategoryFormComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'admin/categories', component: AdminCategoryComponent, canActivate: [AuthGuard, AdminGuard] },
-	{ path: 'products', component: ProductComponent, canActivate: [AuthGuard] },
-	{ path: 'product/details/:id', component: ProductDetailsComponent, canActivate: [AuthGuard] },
-	{ path: 'contactus', component: ContactUsComponent },
-	{ path: '**', component: NotFoundComponent }
-]
+import { appRoutes } from './app.routes';
 
 export function authHttpServiceFactory(http:Http, options: RequestOptions){
 	return new AuthHttp(new AuthConfig(), http, options);
