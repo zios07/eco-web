@@ -8,10 +8,10 @@ stages:
   - build
   - name: deploy
     if: branch = master
- 
+
 jobs:
   include:
     - stage: build
       script: npm run -q build
     - stage: deploy
-      script: skip
+      script: docker build -t nginx ./nginx/
