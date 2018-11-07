@@ -12,6 +12,5 @@ FROM nginx
 EXPOSE 3000
 RUN pwd
 RUN ls -a
-VOLUME [ "/nginx" ]
-# COPY nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/builder /usr/share/nginx/html
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder ./app/builder /usr/share/nginx/html
