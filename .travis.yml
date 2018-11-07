@@ -15,14 +15,8 @@ stages:
   - name: deploy
     if: branch = master
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install git-core
-  - git --version
+install:
+  - npm run -q build
 
-jobs:
-  include:
-    - stage: build
-      script: npm run -q build
-    - stage: deploy
-      script: docker build -t eco-web .
+script:
+  - docker build -t eco-web .

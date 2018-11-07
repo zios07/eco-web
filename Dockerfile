@@ -1,6 +1,8 @@
 FROM node:alpine as builder
 WORKDIR /app
 COPY package.json .
+RUN sudo apt-get update
+RUN sudo apt-get install git-core
 RUN npm install
 COPY . .
 RUN npm run build
