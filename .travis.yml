@@ -4,6 +4,9 @@ language: node_js
 node_js:
   - "8.1.3"
 
+service:
+  - docker
+
 stages:
   - build
   - name: deploy
@@ -14,4 +17,4 @@ jobs:
     - stage: build
       script: npm run -q build
     - stage: deploy
-      script: docker build -t nginx ./nginx/
+      script: docker build -f ./nginx/Dockerfile -t nginx ./nginx/
