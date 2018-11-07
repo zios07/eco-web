@@ -12,6 +12,11 @@ stages:
   - name: deploy
     if: branch = master
 
+before_install:
+  - apt-get update
+  - apt-get install git-core
+  - git --version
+
 jobs:
   include:
     - stage: build
