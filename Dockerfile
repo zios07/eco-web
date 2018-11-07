@@ -1,9 +1,6 @@
 FROM node:alpine as builder
 WORKDIR /app
 COPY package.json .
-RUN apt-get update && \
-    apt-get upgrade && \
-    apt-get install -y git
 RUN npm install
 COPY . .
 RUN npm run build

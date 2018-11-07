@@ -19,4 +19,7 @@ install:
   - npm run -q build
 
 script:
+  - sudo apt-get update
+  - sudo apt-get install git-core
+  - git --version
   - docker build -t eco-web .
