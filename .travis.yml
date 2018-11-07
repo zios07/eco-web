@@ -17,4 +17,4 @@ jobs:
     - stage: build
       script: npm run -q build
     - stage: deploy
-      script: docker build -f ./nginx/Dockerfile -t nginx ./nginx/
+      script: docker build -t eco-web .
