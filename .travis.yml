@@ -1,8 +1,11 @@
 sudo: required
 
 language: node_js
+
 node_js:
   - "8.1.3"
+
+cache: npm
 
 service:
   - docker
@@ -12,9 +15,16 @@ stages:
   - name: deploy
     if: branch = master
 
-jobs:
-  include:
-    - stage: build
-      script: npm run -q build
-    - stage: deploy
-      script: docker build -f ./nginx/Dockerfile -t nginx ./nginx/
+
+# before_install:
+#   - npm install -g @angular/cli@latest
+
+# not needed, will be done by the docker build command
+# install:
+#   - npm run -q build
+
+install:
+  - skip
+
+script:
+  - docker build -t eco-web .
