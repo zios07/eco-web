@@ -15,12 +15,18 @@ stages:
   - name: deploy
     if: branch = master
 
-before_install:
-  - npm install -g @angular/cli@latest
+# before_install:
+#   - npm install -g @angular/cli@latest
 
-## not needed, will be done by the docker build command
+# not needed, will be done by the docker build command
+# install:
+#   - npm run -q build
+
 install:
-  - npm run -q build
+  - skip
 
 script:
   - docker build -t eco-web .
+
+deploy:
+  - echo "deploying ..."
