@@ -28,6 +28,3 @@ install:
 
 script:
   - docker build -t eco-web .
-
-deploy:
-  - echo "deploying ..."
